@@ -17,7 +17,8 @@ func main() {
 	scanner := bufio.NewScanner(f)
 
 	value := 50
-	count := 0
+	zeroesPassed := 0
+	zeroesStopped := 0
 	for scanner.Scan() {
 		line := scanner.Text()
 		direction := string(line[0])
@@ -26,7 +27,7 @@ func main() {
 			fmt.Printf("There was an error parsing %v: %v\n", line, err)
 			os.Exit(1)
 		}
-		for i := 0; i < distance; i++ {
+		for range distance {
 			switch direction {
 			case "L":
 				value--
@@ -37,10 +38,13 @@ func main() {
 				os.Exit(1)
 			}
 			if value%100 == 0 {
-				count++
+				zeroesPassed++
 			}
 		}
+		if value%100 == 0 {
+			zeroesStopped++
+		}
 	}
-	fmt.Printf("Number of Zeros:  %d\n", count)
-
+	fmt.Printf("Number of Zeros stopped on:  %d\n", zeroesStopped)
+	fmt.Printf("Number of Zeros passed:  %d\n", zeroesPassed)
 }
