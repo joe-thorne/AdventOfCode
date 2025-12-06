@@ -64,16 +64,13 @@ func getAdjacentCount(grid [][]string, row, col int) int {
 	for _, d := range dirs {
 		r := row + d[0]
 		c := col + d[1]
-
 		if r < 0 || r >= rows || c < 0 || c >= cols {
 			continue
 		}
-
 		if grid[r][c] == "@" {
 			count++
 		}
 	}
-
 	return count
 }
 
@@ -99,6 +96,5 @@ func readGridFromFile(filePath string) ([][]string, error) {
 	if err := scanner.Err(); err != nil {
 		return nil, fmt.Errorf("error during scanning: %w", err)
 	}
-
 	return grid, nil
 }
